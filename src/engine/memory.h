@@ -7,6 +7,7 @@
 #include <string_view>
 #include <optional>
 #include <span>
+#include <cstring>
 
 namespace Overboss::Memory {
 
@@ -63,7 +64,7 @@ namespace Overboss::Memory {
     bool SafeRead(uintptr_t address, T& outValue) {
         if (!address) return false;
         __try {
-            outValue = *reinterpret_cast<const T*>(address);
+            std::memcpy(&outValue, reinterpret_cast<const void*>(address), sizeof(T));
             return true;
         }
         __except (EXCEPTION_EXECUTE_HANDLER) {

@@ -67,19 +67,25 @@ namespace Overboss::Engine {
         return nullptr;
     }
 
+    static bool SafeInvokeConsole(FnConsoleExecute fn, ConsoleManager* mgr, const char* cmd, TESObjectREFR* target) {
+        __try {
+            fn(mgr, cmd, target);
+            return true;
+        }
+        __except (EXCEPTION_EXECUTE_HANDLER) {
+            return false;
+        }
+    }
+
     bool CreationBridge::ExecuteCommand(std::string_view command, TESObjectREFR* target) {
         if (command.empty()) return false;
 
         ConsoleManager* pConsole = GetConsoleManager();
 
         if (m_fnExecuteCommand && pConsole) {
-            __try {
-                std::string cmdCopy{ command };
-                m_fnExecuteCommand(pConsole, cmdCopy.c_str(), target);
+            std::string cmdCopy{ command };
+            if (SafeInvokeConsole(m_fnExecuteCommand, pConsole, cmdCopy.c_str(), target)) {
                 return true;
-            }
-            __except (EXCEPTION_EXECUTE_HANDLER) {
-                // Command failed or engine state was unstable; queue for safe retry
             }
         }
 
@@ -105,10 +111,7 @@ namespace Overboss::Engine {
                 m_commandQueue.pop();
             }
 
-            __try {
-                m_fnExecuteCommand(pConsole, item.first.c_str(), item.second);
-            }
-            __except (EXCEPTION_EXECUTE_HANDLER) {
+            if (!SafeInvokeConsole(m_fnExecuteCommand, pConsole, item.first.c_str(), item.second)) {
                 // Discard invalid command during exceptional state
                 break;
             }

@@ -142,17 +142,22 @@ namespace Overboss::Features::Radar {
         // 1. Check if engine player is resolved
         auto* pPlayer = Engine::CreationBridge::Get().GetPlayer();
 
+        struct Vec3 {
+            float x = 0.0f;
+            float y = 0.0f;
+            float z = 0.0f;
+        };
+
         // 2. Read live Creation Engine actor references if in game session
         bool liveActorsFound = false;
         if (pPlayer != nullptr) {
-            // Memory layout check for live player coordinates (SEH protected)
-            float playerPos[3] = { 0.0f, 0.0f, 0.0f };
-            float playerRot[3] = { 0.0f, 0.0f, 0.0f };
+            Vec3 playerPos{};
+            Vec3 playerRot{};
 
             // Attempt safe reads from standard Bethesda actor offset ranges
             if (Memory::SafeRead(reinterpret_cast<uintptr_t>(pPlayer) + 0xD0, playerPos)) {
                 // If coordinates are finite and reasonable, live memory reading is active
-                if (!std::isnan(playerPos[0]) && !std::isnan(playerPos[1]) && std::abs(playerPos[0]) < 1000000.0f) {
+                if (!std::isnan(playerPos.x) && !std::isnan(playerPos.y) && std::abs(playerPos.x) < 1000000.0f) {
                     Memory::SafeRead(reinterpret_cast<uintptr_t>(pPlayer) + 0xEC, playerRot);
                     // Live engine data is available
                     liveActorsFound = false; // Will be set to true if actor array scan populated
