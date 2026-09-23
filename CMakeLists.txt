@@ -34,7 +34,24 @@ FetchContent_Declare(
     GIT_REPOSITORY https://github.com/TsudaKageyu/minhook.git
     GIT_TAG        v1.3.3
 )
-FetchContent_MakeAvailable(minhook)
+FetchContent_GetProperties(minhook)
+if(NOT minhook_POPULATED)
+    FetchContent_Populate(minhook)
+
+    add_library(minhook STATIC
+        ${minhook_SOURCE_DIR}/src/buffer.c
+        ${minhook_SOURCE_DIR}/src/hook.c
+        ${minhook_SOURCE_DIR}/src/trampoline.c
+        ${minhook_SOURCE_DIR}/src/hde/hde32.c
+        ${minhook_SOURCE_DIR}/src/hde/hde64.c
+    )
+
+    target_include_directories(minhook PUBLIC
+        ${minhook_SOURCE_DIR}/include
+        ${minhook_SOURCE_DIR}/src
+        ${minhook_SOURCE_DIR}/src/hde
+    )
+endif()
 
 # -----------------------------------------------------------------------------
 # Dependency: Dear ImGui (Docking / DX11 & Win32 Backends)
