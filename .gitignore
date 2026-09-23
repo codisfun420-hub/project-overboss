@@ -8,3 +8,7 @@ obj/
 *.ilk
 *.exp
 *.lib
+artifacts_downloaded/
+*.dll
+*.exe
+
