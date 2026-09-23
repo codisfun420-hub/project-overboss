@@ -62,6 +62,9 @@ namespace Overboss::GUI {
         // Render persistent watermark
         RenderWatermark();
 
+        // Render persistent Enemy Radar overlay HUD
+        Features::Radar::RenderOverlay();
+
         auto& hook = Hooks::DX11Hook::Get();
         if (!hook.IsMenuOpen()) {
             return;
@@ -109,6 +112,11 @@ namespace Overboss::GUI {
 
                 if (ImGui::BeginTabItem("World & Teleport")) {
                     Features::World::RenderTab();
+                    ImGui::EndTabItem();
+                }
+
+                if (ImGui::BeginTabItem("Enemy Radar")) {
+                    Features::Radar::RenderTab();
                     ImGui::EndTabItem();
                 }
 

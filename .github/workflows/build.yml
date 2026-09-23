@@ -1,0 +1,52 @@
+name: Build and Package Project Overboss
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build C++ DLL & Launcher
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Configure CMake (MSVC x64)
+        run: |
+          cmake -B build -A x64 -DCMAKE_BUILD_TYPE=Release
+
+      - name: Compile ProjectOverboss.dll
+        run: |
+          cmake --build build --config Release --target ProjectOverboss --parallel
+
+      - name: Publish Desktop Launcher & Injector
+        run: |
+          dotnet publish launcher/OverbossLauncher.csproj -c Release -r win-x64 --self-contained false -o publish/
+
+      - name: Stage Release Artifacts
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path artifacts
+          Copy-Item build/Release/ProjectOverboss.dll artifacts/ProjectOverboss.dll
+          Copy-Item publish/* artifacts/ -Recurse -Force
+          Write-Host "Staged Release Artifacts:"
+          Get-ChildItem -Recurse artifacts/
+
+      - name: Upload Release Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ProjectOverboss-Release
+          path: artifacts/
+          retention-days: 30

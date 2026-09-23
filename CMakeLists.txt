@@ -24,6 +24,10 @@ if(MSVC)
     )
 endif()
 
+if(POLICY CMP0169)
+    cmake_policy(SET CMP0169 OLD)
+endif()
+
 include(FetchContent)
 
 # -----------------------------------------------------------------------------
@@ -88,6 +92,8 @@ add_library(ProjectOverboss SHARED
     src/features/power_armor.cpp
     src/features/settlement.cpp
     src/features/world.cpp
+    src/features/radar.h
+    src/features/radar.cpp
 )
 
 target_include_directories(ProjectOverboss PRIVATE

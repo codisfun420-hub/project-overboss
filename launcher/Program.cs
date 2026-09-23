@@ -20,14 +20,14 @@ namespace ProjectOverboss
 
     public class MainForm : Form
     {
-        private Label lblTitle;
-        private Label lblStatus;
-        private Label lblHotkeys;
-        private Button btnLaunchGame;
-        private Button btnInject;
-        private Button btnOpenFolder;
-        private Button btnOpenGithub;
-        private System.Windows.Forms.Timer statusTimer;
+        private Label lblTitle = null!;
+        private Label lblStatus = null!;
+        private Label lblHotkeys = null!;
+        private Button btnLaunchGame = null!;
+        private Button btnInject = null!;
+        private Button btnOpenFolder = null!;
+        private Button btnOpenGithub = null!;
+        private System.Windows.Forms.Timer statusTimer = null!;
 
         private const string GameProcessName = "Fallout4";
         private const string SteamLaunchUri = "steam://rungameid/377160";

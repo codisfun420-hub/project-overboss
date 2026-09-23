@@ -46,3 +46,18 @@
 
 ## Phase 6: Verification & Walkthrough
 - [x] Generate `walkthrough.md` with compilation commands, injection instructions, and verification steps
+
+## Phase 7: Enemy Radar & Recon ESP Subsystem
+- [x] Implement `src/features/radar.h` and `src/features/radar.cpp`
+  - [x] 2D circular radar canvas with Pip-Boy phosphor green styling
+  - [x] Entity tracking: Hostiles, neutrals, distances, bearings, elevation (▲ / ▼), health bars
+  - [x] Animated rotating radar sweep scanline
+  - [x] HUD overlay rendering during gameplay
+  - [x] Mod menu interactive radar configuration tab & live preview
+- [x] Integrate Radar overlay and tab in `src/gui/gui.cpp`
+- [x] Update `src/features/features.h` and `CMakeLists.txt`
+
+## Phase 8: GitHub Actions CI Build & Packaging
+- [x] Create `.github/workflows/build.yml` for automated MSVC C++20 and .NET builds
+- [x] Push updates to `codisfun420-hub/project-overboss`
+- [x] Download and verify compiled `ProjectOverboss.dll` release artifact

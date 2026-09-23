@@ -88,10 +88,20 @@ Project Overboss natively supports **two loading methodologies**:
 - **Armory & Weapons**: Instant weapon injection (Deliverer, Fat Man, Gauss Rifle, Minigun, Gatling Laser), bulk ammo delivery (up to 10k per click), and legendary effect attacher (Explosive, Two Shot, Instigating, Furious, Never Ending).
 - **Power Armor**: Spawn empty chassis/frames directly in front of the player, inject full armor sets (T-45, T-51, T-60, X-01), deliver fusion cores, and freeze core discharge.
 - **Settlement & Economy**: Inject 50k+ Caps, 500 Bobby Pins, batch deliver 5,000x of all 22 crafting materials, and bypass workshop triangle/draw limits.
-- **World & Teleport**: Instantly teleport (`coc`) to major Commonwealth hubs (Diamond City, Sanctuary, The Prydwen, Railroad HQ, The Institute, Glowing Sea), reveal all map markers (`tmm 1`), and adjust the daylight timescale.
+- **Enemy Radar & Recon ESP**: Real-time 2D circular Pip-Boy radar overlay on HUD displaying hostile NPCs, distance meters, bearing angles, rooftop/basement elevation indicators (`▲` / `▼`), health gauges, rotating sweep animation, and interactive contact roster.
 - **System & Eject**: Live diagnostics of resolved engine pointers (`PlayerCharacter*`, `ConsoleManager*`) and one-click panic detachment.
 
 ---
+
+## 4. GitHub Actions CI Automated Build
+If you do not have MSVC / Visual Studio 2022 installed locally on your Windows machine, Project Overboss includes a GitHub Actions CI workflow (`.github/workflows/build.yml`):
+1. Pushing to `master` automatically triggers the GitHub Actions workflow on a `windows-latest` runner.
+2. The workflow builds `ProjectOverboss.dll` (MSVC C++20 x64) and `OverbossLauncher.exe` (.NET 8).
+3. Download the compiled artifacts directly using the GitHub CLI:
+   ```powershell
+   gh run download -n ProjectOverboss-Release
+   ```
+4. Or download the artifact ZIP from the **Actions** tab of the GitHub repository.
 
 ## 4. Stability & Verification Notes
 

@@ -17,6 +17,7 @@ It features a dark carbon matte and nuclear phosphor green Pip-Boy theme, resili
 - **Power Armor Fabrication**: Spawn empty chassis/frames directly in front of the player, inject full armor sets (T-45, T-51, T-60, X-01), auto-supply Fusion Cores, and freeze battery drain.
 - **Settlement & Economy**: Caps injection, Bobby Pins, 5,000x batch delivery of all 22 crafting materials, and settlement build budget bypass.
 - **World & Teleportation**: Fast travel to Commonwealth hubs (Diamond City, Sanctuary, Prydwen, Railroad HQ, The Institute, Glowing Sea), reveal all map markers (`tmm 1`), and environment timescale slider.
+- **Enemy Radar & Recon ESP**: Real-time 2D circular Pip-Boy radar overlay on HUD displaying hostile NPCs, distance meters, bearing angles, rooftop/basement elevation indicators (`▲` / `▼`), health gauges, rotating sweep animation, and interactive contact roster.
 - **Diagnostics & Panic Ejection**: Real-time display of resolved Creation Engine pointers (`PlayerCharacter*`, `ConsoleManager*`) and zero-trace panic ejection hotkey (`VK_END`).
 
 ---

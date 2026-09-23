@@ -51,4 +51,19 @@ namespace Overboss::Features {
         void SetGameWeather(std::string_view weatherId);
     }
 
+    namespace Radar {
+        void RenderTab();
+        void RenderOverlay();
+        void Update(float deltaTime);
+
+        bool IsEnabled();
+        void SetEnabled(bool enabled);
+        float GetRange();
+        void SetRange(float range);
+        bool IsHostileOnly();
+        void SetHostileOnly(bool hostileOnly);
+        bool IsShowDistance();
+        void SetShowDistance(bool show);
+    }
+
 } // namespace Overboss::Features
