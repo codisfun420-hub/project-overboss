@@ -12,3 +12,5 @@ artifacts_downloaded/
 *.dll
 *.exe
 
+downloaded_release/
+ProjectOverboss.dll

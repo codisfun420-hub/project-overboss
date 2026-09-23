@@ -232,11 +232,15 @@ namespace ProjectOverboss
                 return;
             }
 
-            string dllPath = Path.Combine(ModDirectory, @"build\Release\ProjectOverboss.dll");
+            string localDll = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ProjectOverboss.dll");
+            string dllPath = localDll;
             if (!File.Exists(dllPath))
             {
-                // Also check directly in mod directory
                 dllPath = Path.Combine(ModDirectory, "ProjectOverboss.dll");
+            }
+            if (!File.Exists(dllPath))
+            {
+                dllPath = Path.Combine(ModDirectory, @"build\Release\ProjectOverboss.dll");
             }
 
             if (!File.Exists(dllPath))
