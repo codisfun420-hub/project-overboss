@@ -39,7 +39,13 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path artifacts
-          Copy-Item build/Release/ProjectOverboss.dll artifacts/ProjectOverboss.dll
+          $dllFile = Get-ChildItem -Path build -Filter "ProjectOverboss.dll" -Recurse | Select-Object -First 1
+          if ($dllFile) {
+              Copy-Item $dllFile.FullName artifacts/ProjectOverboss.dll
+              Write-Host "Found and copied DLL: $($dllFile.FullName)"
+          } else {
+              throw "ProjectOverboss.dll was not found after compilation!"
+          }
           Copy-Item publish/* artifacts/ -Recurse -Force
           Write-Host "Staged Release Artifacts:"
           Get-ChildItem -Recurse artifacts/

@@ -17,10 +17,6 @@ if(MSVC)
         /W3              # Warning level 3
         /permissive-     # Strict C++ conformance
         /EHsc            # Standard C++ exception handling (interops with SEH)
-        $<$<CONFIG:Release>:/O2 /Oi /Ot /GL> # High performance optimization
-    )
-    add_link_options(
-        $<$<CONFIG:Release>:/LTCG /OPT:REF /OPT:ICF>
     )
 endif()
 
